@@ -2,13 +2,10 @@
 <project version="4">
   <component name="ChangeListManager">
     <list default="true" id="a50ea7ef-4a4e-42f1-9a8b-c24c7e5c0527" name="Default Changelist" comment="">
-      <change afterPath="$PROJECT_DIR$/src/codes.ts" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/test/e2e.test.ts" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/src/qr.ts" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/src/read.js" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/index.ts" beforeDir="false" afterPath="$PROJECT_DIR$/src/index.ts" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/rand.ts" beforeDir="false" afterPath="$PROJECT_DIR$/src/rand.ts" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/test/index.test.ts" beforeDir="false" afterPath="$PROJECT_DIR$/test/index.test.ts" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/tsconfig.json" beforeDir="false" afterPath="$PROJECT_DIR$/tsconfig.json" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/package.json" beforeDir="false" afterPath="$PROJECT_DIR$/package.json" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -19,6 +16,7 @@
     <option name="RECENT_TEMPLATES">
       <list>
         <option value="TypeScript File" />
+        <option value="JavaScript File" />
       </list>
     </option>
   </component>
@@ -50,7 +48,7 @@
       <option name="number" value="Default" />
       <option name="presentableId" value="Default" />
       <updated>1612892094799</updated>
-      <workItem from="1612892097394" duration="15368000" />
+      <workItem from="1612892097394" duration="16860000" />
     </task>
     <servers />
   </component>
