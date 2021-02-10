@@ -1,3 +1,5 @@
+import {IdealSampler} from "./rand";
+
 export const sum = (a: number, b: number) => {
     if ('development' === process.env.NODE_ENV) {
         console.log('boop');
@@ -22,18 +24,54 @@ export function xorBuffer(b1: Buffer, b2: Buffer) {
 }
 
 
+export class BlindDecoder {
+    private k: number = -1;
+    total: number = -1;
+    private decoder!: Decoder;
+
+    decode(phyPacket: Buffer) {
+
+        const seed = phyPacket.readInt32BE(0)
+        const k = phyPacket.readInt32BE(4);
+        const total = phyPacket.readInt32BE(8);
+        const data = phyPacket.slice(12);
+
+        if (this.k !== k) {
+            this.k = k;
+            this.total = total;
+            this.decoder = new Decoder({packets:this.k, totalSize:this.total})
+        }
+
+        this.decoder.decode(seed, data);
+    }
+
+    isDone(){
+        return this.decoder?.isDone();
+    }
+
+    dump(){
+        return this.decoder.dump();
+    }
+}
+
 export class Decoder {
     solved: Record<number, Buffer> = {};
     graphCenter: Record<number, Graph[]> = {};
-    private k: number;
-    private size: number;
-    private total: number;
+    private k: number = -1;
+    private total: number = -1;
+    private sampler: IdealSampler;
 
-    constructor(config: { packets: number, packetSize: number, totalSize: number }) {
+    constructor(config: { packets: number, totalSize: number }) {
         this.k = config.packets;
-        this.size = config.packetSize;
         this.total = config.totalSize;
+        this.sampler = new IdealSampler(this.k);
     }
+
+    decode(seed: number, data: Buffer) {
+        const nodes = this.sampler.generateWith(seed);
+        this.handlePacket(Array.from(nodes), data);
+    }
+
 
     handlePacket(nodes: number[], data: Buffer) {
         if (nodes.length === 1 && !this.solved[nodes[0]]) {
@@ -126,7 +164,7 @@ export class Decoder {
             const dumped = Buffer.alloc(this.total);
             for (let i = 0; i < this.k; i++) {
                 const b = this.solved[i];
-                dumped.write(b.toString('hex'), i * this.size, this.size, 'hex');
+                dumped.write(b.toString('hex'), i * b.length, b.length, 'hex');
             }
             return dumped;
         } else {

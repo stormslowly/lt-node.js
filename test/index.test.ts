@@ -18,7 +18,7 @@ describe('decoder', () => {
 
     it('1,1,1', () => {
 
-        const d = new Decoder({packetSize: 1, packets: 3, totalSize: 3});
+        const d = new Decoder({packets: 3, totalSize: 3});
 
         d.handlePacket([0], slicedPackets[0]);
         d.handlePacket([1], slicedPackets[1]);
@@ -30,7 +30,7 @@ describe('decoder', () => {
 
     it('1,2,2', () => {
 
-        const d = new Decoder({packetSize: 1, packets: 3, totalSize: 3});
+        const d = new Decoder({packets: 3, totalSize: 3});
 
         d.handlePacket(...xorPack(0));
         d.handlePacket(...xorPack(0, 1));
@@ -42,7 +42,7 @@ describe('decoder', () => {
 
     it('2,1,2', () => {
 
-        const d = new Decoder({packetSize: 1, packets: 3, totalSize: 3});
+        const d = new Decoder({packets: 3, totalSize: 3});
 
         d.handlePacket(...xorPack(0, 1));
         d.handlePacket(...xorPack(0));
@@ -53,7 +53,7 @@ describe('decoder', () => {
     });
 
     it('3,2,1', () => {
-        const d = new Decoder({packetSize: 1, packets: 3, totalSize: 3});
+        const d = new Decoder({packets: 3, totalSize: 3});
 
         d.handlePacket(...xorPack(0, 1, 2));
         d.handlePacket(...xorPack(1, 0));

@@ -63,14 +63,14 @@ export class IdealSampler {
     }
 
     private getI() {
-        return this.prg.next() % this.k + 1;
+        return this.prg.next() % this.k;
     }
 
     getT() {
         const p = this.prg.next() / PRNG_M;
         for (let i = 1; i <= this.k; i++) {
             if (this.cdf[i] >= p) {
-                return i
+                return i;
             }
         }
 
