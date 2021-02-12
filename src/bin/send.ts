@@ -11,17 +11,19 @@ const fileNameArg = process.argv[2];
 const filepath = path.isAbsolute(fileNameArg) ? fileNameArg : path.join(process.cwd(), fileNameArg);
 
 
-const fileBuffer = fs.readFileSync(filepath, "binary")
+const fileBuffer = fs.readFileSync(filepath);
 
 
-const encoder = new Encoder(fileBuffer, 500);
+const encoder = new Encoder(fileBuffer, 200);
 
+qrcode.setErrorLevel('L');
 
 setInterval(() => {
     const buffer = encoder.generatePackage();
 
-    qrcode.generate(buffer.toString('ascii'), (x: string) => {
+    qrcode.generate(buffer.toString('hex'), (x: string) => {
         console.clear();
+        console.log('');
         console.log(x);
     });
-}, 500);
+}, 300);

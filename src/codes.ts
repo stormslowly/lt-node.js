@@ -51,7 +51,9 @@ export class Encoder {
             this.k,
             this.fileSize
         ];
-        const phyPacket = Buffer.alloc(p.length + 3 * 4);
+        const phyPacket = Buffer.alloc(p.length + 3 * 4, 0);
+
+        console.log('debug ===', seed, nodes);
 
         for (let [i, data] of headers.entries()) {
             phyPacket.writeInt32BE(data, i * 4);

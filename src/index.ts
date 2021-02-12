@@ -29,27 +29,36 @@ export class BlindDecoder {
     total: number = -1;
     private decoder!: Decoder;
 
+    seedRecord: Record<number, boolean> = {};
+
     decode(phyPacket: Buffer) {
 
         const seed = phyPacket.readInt32BE(0)
         const k = phyPacket.readInt32BE(4);
         const total = phyPacket.readInt32BE(8);
         const data = phyPacket.slice(12);
+        if (this.seedRecord[seed]) {
+            return;
+        }
+
+        this.seedRecord[seed] = true;
 
         if (this.k !== k) {
             this.k = k;
             this.total = total;
-            this.decoder = new Decoder({packets:this.k, totalSize:this.total})
+            this.seedRecord = {};
+            this.decoder = new Decoder({packets: this.k, totalSize: this.total})
         }
 
+        console.log(seed, k, total);
         this.decoder.decode(seed, data);
     }
 
-    isDone(){
+    isDone() {
         return this.decoder?.isDone();
     }
 
-    dump(){
+    dump() {
         return this.decoder.dump();
     }
 }
@@ -69,6 +78,14 @@ export class Decoder {
 
     decode(seed: number, data: Buffer) {
         const nodes = this.sampler.generateWith(seed);
+
+        console.log(nodes.size)
+
+        if (nodes.size === 1) {
+            console.log(seed, nodes)
+            console.log(data.toString("ascii"));
+        }
+
         this.handlePacket(Array.from(nodes), data);
     }
 

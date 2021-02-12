@@ -1,3 +1,5 @@
+import * as fs from "fs";
+import * as path from "path";
 import {BlindDecoder} from "../src";
 import {Encoder} from "../src/codes";
 
@@ -5,16 +7,12 @@ import {Encoder} from "../src/codes";
 describe('e2e', () => {
 
     it('decode 1000 bytes', () => {
-        const fileSize = 10;
-        const file = Buffer.alloc(fileSize, 0);
-        for (let i = 0; i < fileSize; i++) {
-            file[i] = i % 256;
-        }
+        const file = fs.readFileSync(path.join(__dirname,'../README.md'));
 
-        const encoder = new Encoder(file, 1);
+        const encoder = new Encoder(file, 200);
         const deccoder = new BlindDecoder();
 
-        let i = 0
+        let i = 0;
         while (!deccoder.isDone()) {
 
             const p = encoder.generatePackage();
