@@ -1,8 +1,11 @@
 const { captureQrCodesFromCamera } = require('qrcode-camera-decode');
 
 
-
-captureQrCodesFromCamera({verbosity:1})
-    .subscribe((x)=>{
+captureQrCodesFromCamera({
+    verbosity: 2,
+    rate: 5,
+})
+    .subscribe((x) => {
         console.log(x);
+
     })

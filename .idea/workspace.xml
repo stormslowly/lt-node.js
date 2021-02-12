@@ -2,10 +2,13 @@
 <project version="4">
   <component name="ChangeListManager">
     <list default="true" id="a50ea7ef-4a4e-42f1-9a8b-c24c7e5c0527" name="Default Changelist" comment="">
-      <change afterPath="$PROJECT_DIR$/src/qr.ts" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/src/read.js" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/src/bin/send.ts" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/xtsconfig.json" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/package.json" beforeDir="false" afterPath="$PROJECT_DIR$/package.json" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/qr.ts" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/read.js" beforeDir="false" afterPath="$PROJECT_DIR$/src/bin/read.ts" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/tsconfig.json" beforeDir="false" afterPath="$PROJECT_DIR$/tsconfig.json" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -17,6 +20,7 @@
       <list>
         <option value="TypeScript File" />
         <option value="JavaScript File" />
+        <option value="tsconfig.json" />
       </list>
     </option>
   </component>
@@ -35,8 +39,14 @@
     <property name="WebServerToolWindowFactoryState" value="false" />
     <property name="nodejs_interpreter_path.stuck_in_default_project" value="undefined stuck path" />
     <property name="nodejs_npm_path_reset_for_default_project" value="true" />
+    <property name="nodejs_package_manager_path" value="yarn" />
     <property name="prettierjs.PrettierConfiguration.Package" value="$PROJECT_DIR$/node_modules/prettier" />
     <property name="ts.external.directory.path" value="$PROJECT_DIR$/node_modules/typescript/lib" />
+  </component>
+  <component name="RecentsManager">
+    <key name="MoveFile.RECENT_KEYS">
+      <recent name="$PROJECT_DIR$/src/bin" />
+    </key>
   </component>
   <component name="SvnConfiguration">
     <configuration />
@@ -48,21 +58,44 @@
       <option name="number" value="Default" />
       <option name="presentableId" value="Default" />
       <updated>1612892094799</updated>
-      <workItem from="1612892097394" duration="16860000" />
+      <workItem from="1612892097394" duration="19205000" />
+      <workItem from="1613137860933" duration="3171000" />
     </task>
     <servers />
   </component>
   <component name="TypeScriptGeneratedFilesManager">
     <option name="version" value="1" />
+    <option name="exactExcludedFiles">
+      <list>
+        <option value="$PROJECT_DIR$/src/index.js.map" />
+        <option value="$PROJECT_DIR$/src/codes.js.map" />
+        <option value="$PROJECT_DIR$/src/index.js" />
+        <option value="$PROJECT_DIR$/src/rand.js.map" />
+        <option value="$PROJECT_DIR$/src/rand.js" />
+        <option value="$PROJECT_DIR$/src/codes.js" />
+        <option value="$PROJECT_DIR$/test/e2e.test.js.map" />
+        <option value="$PROJECT_DIR$/test/index.test.js" />
+        <option value="$PROJECT_DIR$/test/sampler.test.js.map" />
+        <option value="$PROJECT_DIR$/test/sampler.test.js" />
+        <option value="$PROJECT_DIR$/test/index.test.js.map" />
+        <option value="$PROJECT_DIR$/test/e2e.test.js" />
+        <option value="$PROJECT_DIR$/src/bin/send.js" />
+        <option value="$PROJECT_DIR$/src/bin/send.js.map" />
+      </list>
+    </option>
   </component>
   <component name="WindowStateProjectService">
+    <state x="246" y="123" width="1410" height="790" key="DiffContextDialog" timestamp="1613146504468">
+      <screen x="0" y="23" width="1920" height="990" />
+    </state>
+    <state x="246" y="123" width="1410" height="790" key="DiffContextDialog/0.23.1920.990@0.23.1920.990" timestamp="1613146504468" />
     <state x="678" y="275" width="667" height="486" key="find.popup" timestamp="1612973495030">
       <screen x="0" y="23" width="1920" height="990" />
     </state>
     <state x="678" y="275" width="667" height="486" key="find.popup/0.23.1920.990@0.23.1920.990" timestamp="1612973495030" />
-    <state x="677" y="241" width="670" height="676" key="search.everywhere.popup" timestamp="1612981703769">
+    <state x="677" y="241" width="670" height="676" key="search.everywhere.popup" timestamp="1613146128950">
       <screen x="0" y="23" width="1920" height="990" />
     </state>
-    <state x="677" y="241" width="670" height="676" key="search.everywhere.popup/0.23.1920.990@0.23.1920.990" timestamp="1612981703769" />
+    <state x="677" y="241" width="670" height="676" key="search.everywhere.popup/0.23.1920.990@0.23.1920.990" timestamp="1613146128950" />
   </component>
 </project>
