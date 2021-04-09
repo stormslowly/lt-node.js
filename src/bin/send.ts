@@ -14,7 +14,7 @@ const filepath = path.isAbsolute(fileNameArg) ? fileNameArg : path.join(process.
 const fileBuffer = fs.readFileSync(filepath);
 
 
-const encoder = new Encoder(fileBuffer, 200);
+const encoder = new Encoder(fileBuffer, 116);
 
 qrcode.setErrorLevel('L');
 

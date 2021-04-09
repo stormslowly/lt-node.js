@@ -29,6 +29,8 @@ export class BlindDecoder {
     total: number = -1;
     private decoder!: Decoder;
 
+    public received = 0;
+
     seedRecord: Record<number, boolean> = {};
 
     decode(phyPacket: Buffer) {
@@ -47,10 +49,13 @@ export class BlindDecoder {
             this.k = k;
             this.total = total;
             this.seedRecord = {};
+            this.received = 0;
             this.decoder = new Decoder({packets: this.k, totalSize: this.total})
         }
 
         console.log(seed, k, total);
+        this.received++;
+        console.log('==>', this.received / k);
         this.decoder.decode(seed, data);
     }
 
@@ -78,8 +83,6 @@ export class Decoder {
 
     decode(seed: number, data: Buffer) {
         const nodes = this.sampler.generateWith(seed);
-
-        console.log(nodes.size)
 
         if (nodes.size === 1) {
             console.log(seed, nodes)
