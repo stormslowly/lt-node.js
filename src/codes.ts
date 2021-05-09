@@ -49,16 +49,17 @@ export class Encoder {
         const headers = [
             seed,
             this.k,
+            this.packSize,
             this.fileSize
         ];
-        const phyPacket = Buffer.alloc(p.length + 3 * 4, 0);
 
-        console.log('debug ===', seed, nodes);
+        const headerByteLength = headers.length * 4;
+        const phyPacket = Buffer.alloc(p.length + headerByteLength, 0);
 
         for (let [i, data] of headers.entries()) {
             phyPacket.writeInt32BE(data, i * 4);
         }
-        p.copy(phyPacket, 12);
+        p.copy(phyPacket, headerByteLength);
 
         return phyPacket;
     }

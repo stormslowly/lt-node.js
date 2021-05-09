@@ -35,10 +35,19 @@ export class BlindDecoder {
 
     decode(phyPacket: Buffer) {
 
-        const seed = phyPacket.readInt32BE(0)
+        const seed = phyPacket.readInt32BE(0);
         const k = phyPacket.readInt32BE(4);
-        const total = phyPacket.readInt32BE(8);
-        const data = phyPacket.slice(12);
+        const packSize = phyPacket.readInt32BE(8);
+        const total = phyPacket.readInt32BE(12);
+        const data = phyPacket.slice(16);
+
+        console.error(k, data.length);
+
+        if (packSize !== data.length) {
+            console.error(`drop corrupted data package`);
+            return;
+        }
+
         if (this.seedRecord[seed]) {
             return;
         }
