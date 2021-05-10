@@ -1200,6 +1200,13 @@
     "@types/connect" "*"
     "@types/node" "*"
 
+"@types/buffer-crc32@^0.2.0":
+  "integrity" "sha1-pNlLGk8B6kFCaOnvdXbH0yoaFOQ="
+  "resolved" "https://registry.npm.taobao.org/@types/buffer-crc32/download/@types/buffer-crc32-0.2.0.tgz"
+  "version" "0.2.0"
+  dependencies:
+    "@types/node" "*"
+
 "@types/connect@*":
   "integrity" "sha1-FwpAIjptZmAG2TyhKK8r6x2bGQE="
   "resolved" "https://registry.npm.taobao.org/@types/connect/download/@types/connect-3.4.34.tgz?cache=0&sync_timestamp=1613378517796&other_urls=https%3A%2F%2Fregistry.npm.taobao.org%2F%40types%2Fconnect%2Fdownload%2F%40types%2Fconnect-3.4.34.tgz"
@@ -2245,6 +2252,11 @@
   "version" "2.1.1"
   dependencies:
     "node-int64" "^0.4.0"
+
+"buffer-crc32@^0.2.13":
+  "integrity" "sha1-DTM+PwDqxQqhRUq9MO+MKl2ackI="
+  "resolved" "https://registry.npm.taobao.org/buffer-crc32/download/buffer-crc32-0.2.13.tgz"
+  "version" "0.2.13"
 
 "buffer-from@^1.0.0", "buffer-from@1.x":
   "integrity" "sha1-MnE7wCj3XAL9txDXx7zsHyxgcO8="

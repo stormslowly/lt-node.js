@@ -1,3 +1,4 @@
+import crc32 from "buffer-crc32";
 import {IdealSampler} from "./rand";
 
 export const sum = (a: number, b: number) => {
@@ -34,17 +35,22 @@ export class BlindDecoder {
     seedRecord: Record<number, boolean> = {};
 
     decode(phyPacket: Buffer) {
+        const len = phyPacket.length
 
         const seed = phyPacket.readInt32BE(0);
         const k = phyPacket.readInt32BE(4);
-        const packSize = phyPacket.readInt32BE(8);
-        const total = phyPacket.readInt32BE(12);
-        const data = phyPacket.slice(16);
+        const total = phyPacket.readInt32BE(8);
+        const data = phyPacket.slice(12, len - 4);
+
+        const crc32Sum = phyPacket.slice(len - 4);
 
         console.error(k, data.length);
 
-        if (packSize !== data.length) {
-            console.error(`drop corrupted data package`);
+        const receivedCrc = crc32(data);
+
+
+        if (crc32Sum.toString('hex') !== receivedCrc.toString('hex')) {
+            console.error(`drop corrupted data package expect ${crc32Sum} but ${receivedCrc}`, );
             return;
         }
 

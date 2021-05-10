@@ -1,3 +1,4 @@
+import crc32 from "buffer-crc32";
 import {xorBuffer} from "./index";
 import {IdealSampler} from "./rand";
 
@@ -38,7 +39,6 @@ export class Encoder {
         const p = Buffer.alloc(this.packSize, 0);
         for (let i of nodes.values()) {
             try {
-
                 xorBuffer(p, this.buffers[i]);
             } catch (e) {
                 console.log(i);
@@ -46,20 +46,23 @@ export class Encoder {
             }
         }
 
+
+        const crcSum = crc32(p);
+
         const headers = [
             seed,
             this.k,
-            this.packSize,
             this.fileSize
         ];
 
         const headerByteLength = headers.length * 4;
-        const phyPacket = Buffer.alloc(p.length + headerByteLength, 0);
+        const phyPacket = Buffer.alloc(p.length + headerByteLength + crcSum.length, 0);
 
         for (let [i, data] of headers.entries()) {
             phyPacket.writeInt32BE(data, i * 4);
         }
         p.copy(phyPacket, headerByteLength);
+        crcSum.copy(phyPacket, headerByteLength + p.length);
 
         return phyPacket;
     }
