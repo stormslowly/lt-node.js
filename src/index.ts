@@ -35,38 +35,33 @@ export class BlindDecoder {
     seedRecord: Record<number, boolean> = {};
 
     decode(phyPacket: Buffer) {
-        const len = phyPacket.length
+        const len = phyPacket.length;
+
+        const crc32Sum = phyPacket.slice(len - 4);
+        const receivedCrc = crc32(phyPacket.slice(0, len - 4));
+        if (crc32Sum.toString('hex') !== receivedCrc.toString('hex')) {
+            console.error(`drop corrupted data package expect ${crc32Sum} but ${receivedCrc}`,);
+            return;
+        }
 
         const seed = phyPacket.readInt32BE(0);
         const k = phyPacket.readInt32BE(4);
         const total = phyPacket.readInt32BE(8);
         const data = phyPacket.slice(12, len - 4);
-
-        const crc32Sum = phyPacket.slice(len - 4);
-
-        console.error(k, data.length);
-
-        const receivedCrc = crc32(data);
-
-
-        if (crc32Sum.toString('hex') !== receivedCrc.toString('hex')) {
-            console.error(`drop corrupted data package expect ${crc32Sum} but ${receivedCrc}`, );
-            return;
-        }
-
+        
         if (this.seedRecord[seed]) {
             return;
         }
 
-        this.seedRecord[seed] = true;
-
-        if (this.k !== k) {
+        if (this.k !== k || total !== this.total) {
             this.k = k;
             this.total = total;
             this.seedRecord = {};
             this.received = 0;
             this.decoder = new Decoder({packets: this.k, totalSize: this.total})
         }
+
+        this.seedRecord[seed] = true;
 
         console.log(seed, k, total);
         this.received++;
@@ -134,22 +129,22 @@ export class Decoder {
         }
     }
 
-    private removeGraph(i: number) {
-        const graphs = this.graphCenter[i];
+    private removeGraph(solvedIndex: number) {
+        const graphs = this.graphCenter[solvedIndex];
         if (graphs && graphs.length) {
             let left = [];
             let solved = [];
             for (const g of graphs) {
-                this.solveGraph(g, i);
+                this.solveGraph(g, solvedIndex);
                 if (g.edges.length === 1) {
-                    if (g.edges[0] !== i) {
+                    if (g.edges[0] !== solvedIndex) {
                         solved.push(g);
                     }
                 } else {
                     left.push(g);
                 }
             }
-            this.graphCenter[i] = left;
+            this.graphCenter[solvedIndex] = left;
             return solved;
         }
         return [];

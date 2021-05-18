@@ -32,8 +32,9 @@ describe('decoder', () => {
 
         const d = new Decoder({packets: 3, totalSize: 3});
 
-        d.handlePacket(...xorPack(0));
         d.handlePacket(...xorPack(0, 1));
+        d.handlePacket(...xorPack(0, 1));
+        d.handlePacket(...xorPack(0));
         d.handlePacket(...xorPack(0, 2));
 
         expect(d.isDone()).toBe(true);

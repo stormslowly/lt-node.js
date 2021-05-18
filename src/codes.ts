@@ -36,18 +36,15 @@ export class Encoder {
     generatePackage(): Buffer {
         const {seed, nodes} = this.smapler.randGenerate();
 
-        const p = Buffer.alloc(this.packSize, 0);
+        const payload = Buffer.alloc(this.packSize, 0);
         for (let i of nodes.values()) {
             try {
-                xorBuffer(p, this.buffers[i]);
+                xorBuffer(payload, this.buffers[i]);
             } catch (e) {
                 console.log(i);
                 throw e;
             }
         }
-
-
-        const crcSum = crc32(p);
 
         const headers = [
             seed,
@@ -56,15 +53,21 @@ export class Encoder {
         ];
 
         const headerByteLength = headers.length * 4;
-        const phyPacket = Buffer.alloc(p.length + headerByteLength + crcSum.length, 0);
+        const phyPacket = Buffer.alloc(payload.length + headerByteLength, 0);
 
         for (let [i, data] of headers.entries()) {
             phyPacket.writeInt32BE(data, i * 4);
         }
-        p.copy(phyPacket, headerByteLength);
-        crcSum.copy(phyPacket, headerByteLength + p.length);
+        payload.copy(phyPacket, headerByteLength);
 
-        return phyPacket;
+        const crcSum = crc32(phyPacket);
+
+        const packetToSend = Buffer.alloc(phyPacket.length + crcSum.length);
+
+        phyPacket.copy(packetToSend);
+        crcSum.copy(packetToSend, phyPacket.length)
+
+        return packetToSend;
     }
 }
 
