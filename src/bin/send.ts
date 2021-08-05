@@ -1,3 +1,4 @@
+#!/usr/bin/env node
 import {Encoder} from "../codes";
 
 const qrcode = require('qrcode-terminal');

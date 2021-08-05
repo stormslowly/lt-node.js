@@ -5,8 +5,13 @@
   "typings": "dist/index.d.ts",
   "files": [
     "dist",
-    "src"
+    "src",
+    "html"
   ],
+  "bin": {
+    "lt-send": "dist/bin/send.js",
+    "lt-recv": "dist/bin/wsRecv.js"
+  },
   "engines": {
     "node": ">=10"
   },
