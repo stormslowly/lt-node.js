@@ -35,6 +35,6 @@ wss.on('connection', function connection(ws) {
 });
 
 server.listen(8080, function () {
-    console.log('Listening on http://localhost:8080');
+    console.log('open http://localhost:8080 to capture qrcode to receive file');
 });
 
