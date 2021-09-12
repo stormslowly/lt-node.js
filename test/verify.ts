@@ -1,9 +1,10 @@
 import * as fs from "fs";
+import {join} from "path"
 import {BlindDecoder} from "../src";
 import {Encoder} from "../src/codes";
 
 
-const file = fs.readFileSync('/Volumes/huge/downloads/舒鹏飞简历2019.pdf');
+const file = fs.readFileSync(join(__dirname,'test.epub'));
 const encoder = new Encoder(file, 178);
 const decoder = new BlindDecoder();
 
@@ -20,4 +21,4 @@ while (!decoder.isDone()) {
 const d = decoder.dump();
 
 
-fs.writeFileSync('./test.pdf', d);
+fs.writeFileSync('./test-received.epub', d);
